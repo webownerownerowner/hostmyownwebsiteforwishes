@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        /* CSS Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fed6e3 0%, #a8c1ef 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            z-index: 10;
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.6); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        h1 {
+            color: #ff4a75;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .cake-emoji {
+            font-size: 4.5rem;
+            margin: 15px 0;
+            animation: float 3s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .btn {
+            background-color: #ff4a75;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            box-shadow: 0 5px 15px rgba(255, 74, 117, 0.3);
+        }
+
+        .btn:hover {
+            background-color: #e03861;
+            transform: scale(1.05);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Confetti Styling */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: fall linear forwards;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HTML Structure -->
+    <div class="card">
+        <div class="cake-emoji">🎂</div>
+        <h1>Happy Birthday!</h1>
+        <p>Wishing you a wonderful day filled with celebration, laughter, and endless joy! Enjoy your special day!</p>
+        <button class="btn" onclick="celebrate()">Celebrate! 🎉</button>
+    </div>
+
+    <!-- JavaScript Interactivity -->
+    <script>
+        function celebrate() {
+            // Colors for the confetti pieces
+            const colors = ['#ff4a75', '#ffca28', '#42a5f5', '#66bb6a', '#ab47bc'];
+            
+            // Create 50 confetti particles per click
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                
+                // Randomize background color, sizes, shapes, and drop points
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                
+                const size = Math.random() * 8 + 6 + 'px';
+                confetti.style.width = size;
+                confetti.style.height = size;
+                
+                // Keep some square and some round
+                if (Math.random() > 0.5) {
+                    confetti.style.borderRadius = '0';
+                }
+
+                // Randomize animation duration and speed
+                confetti.style.animationDuration = Math.random() * 2 + 2 + 's';
+                
+                document.body.appendChild(confetti);
+                
+                // Remove elements from DOM after animation completes to keep it clean
+                setTimeout(() => {
+                    confetti.remove();
+                }, 4000);
+            }
+        }
+    </script>
+
+</body>
+</html>
+
